@@ -43,3 +43,4 @@
 - AULA 06 Trabalhando com Sessão
     - 02 Guardando o usuário
     - 05 Protegendo a aplicação
+    - 07 Implementando Logout
