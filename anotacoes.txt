@@ -18,3 +18,5 @@
     - 06 Isolando o HTML
     - 08 Particionando o HTML
     - 10 O padrão MVC
+- AULA 03 HTTP, Formulários e Validação
+    - 02 Formulários e PHP
