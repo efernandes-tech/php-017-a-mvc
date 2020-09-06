@@ -32,3 +32,9 @@
     - 08 Chamada do HTML
 - AULA 05 Autenticando usuários
     - 02 Formulário de login
+    - 03 Senhas no banco
+        php -a
+        > echo password_hash('12345', PASSWORD_ARGON2I);
+        > $argon2i$v=19$m=1024,t=2,p=2$Y3J4dUNCLy5vcWo4WUtZSA$ExPuPUSOjWcGE8bAuid+fi+Kg5LY/mc4g4K5mBZ8oP8
+        vendor/bin/doctrine list
+        vendor/bin/doctrine dbal:run-sql 'INSERT INTO usuarios (email, senha) VALUES ("edersonluis.rf@gmail.com", "$argon2i$v=19$m=1024,t=2,p=2$Y3J4dUNCLy5vcWo4WUtZSA$ExPuPUSOjWcGE8bAuid+fi+Kg5LY/mc4g4K5mBZ8oP8")'
