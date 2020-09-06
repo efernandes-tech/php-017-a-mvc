@@ -30,3 +30,5 @@
     - 04 Formulário de alteração
     - 06 Salvando as alterações
     - 08 Chamada do HTML
+- AULA 05 Autenticando usuários
+    - 02 Formulário de login
