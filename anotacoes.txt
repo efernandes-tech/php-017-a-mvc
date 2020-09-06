@@ -17,3 +17,4 @@
     - 04 Assinando um Contrato
     - 06 Isolando o HTML
     - 08 Particionando o HTML
+    - 10 O padrão MVC
