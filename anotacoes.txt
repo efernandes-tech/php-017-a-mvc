@@ -29,3 +29,4 @@
         vendor/bin/doctrine orm:generate-proxies
     - 04 Formulário de alteração
     - 06 Salvando as alterações
+    - 08 Chamada do HTML
