@@ -44,3 +44,4 @@
     - 02 Guardando o usuário
     - 05 Protegendo a aplicação
     - 07 Implementando Logout
+    - 09 Adicionando mensagens

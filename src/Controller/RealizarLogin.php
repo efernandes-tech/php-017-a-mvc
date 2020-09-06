@@ -21,7 +21,9 @@ class RealizarLogin implements InterfaceControladorRequisicao
         $email = filter_input(INPUT_POST, 'email', FILTER_VALIDATE_EMAIL);
 
         if (is_null($email) && $email === false) {
-            echo 'E-mail inválido';
+            $_SESSION['tipo_mensagem'] = 'danger';
+            $_SESSION['mensagem'] = 'E-mail inválido';
+            header('Location: /login');
             return;
         }
 
@@ -30,7 +32,9 @@ class RealizarLogin implements InterfaceControladorRequisicao
         $usuario = $this->repositorioDeUsuarios->findOneBy(['email' => $email]);
 
         if (is_null($usuario) || ! $usuario->senhaEstaCorreta($senha)) {
-            echo 'E-mail e senha inválidos';
+            $_SESSION['tipo_mensagem'] = 'danger';
+            $_SESSION['mensagem'] = 'E-mail e senha inválidos';
+            header('Location: /login');
             return;
         }
 
