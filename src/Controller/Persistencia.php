@@ -23,5 +23,7 @@ class Persistencia implements InterfaceControladorRequisicao
 
         $this->entityManager->persist($curso);
         $this->entityManager->flush();
+
+        header('Location: /listar-cursos', true, 302);
     }
 }

@@ -21,3 +21,4 @@
 - AULA 03 HTTP, Formulários e Validação
     - 02 Formulários e PHP
     - 04 Filtrando Dados
+    - 06 Cabeçalhos HTTP
