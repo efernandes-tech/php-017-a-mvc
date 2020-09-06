@@ -48,3 +48,7 @@
     - 11 Flexibilidade com Traits
 - AULA 07 PSRs e Boas Práticas
     - 02 Conhecendo as PSRs
+    - 04 Representando melhor o HTTP
+        composer require psr/http-message
+        composer require nyholm/psr7
+        composer require nyholm/psr7-server
