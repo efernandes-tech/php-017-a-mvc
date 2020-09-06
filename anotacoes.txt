@@ -3,6 +3,7 @@
 # Anotações:
 - Start:
     composer install
+    vendor/bin/doctrine orm:generate-proxies
 - Run:
     php -S localhost:8080 -t public
 - AULA 01 Uma entrada para as requisições
@@ -26,3 +27,4 @@
 - AULA 04 Completando o cadastro
     - 02 Exclusão de um curso
         vendor/bin/doctrine orm:generate-proxies
+    - 04 Formulário de alteração

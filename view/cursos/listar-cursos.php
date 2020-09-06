@@ -9,9 +9,14 @@
         <li class="list-group-item d-flex justify-content-between">
             <?= $curso->getDescricao(); ?>
 
-            <a href="/excluir-curso?id=<?= $curso->getId() ?>" class="btn btn-danger btn-sm">
-                Excluir
-            </a>
+            <span>
+                <a href="/alterar-curso?id=<?= $curso->getId() ?>" class="btn btn-info btn-sm">
+                    Alterar
+                </a>
+                <a href="/excluir-curso?id=<?= $curso->getId() ?>" class="btn btn-danger btn-sm">
+                    Excluir
+                </a>
+            </span>
         </li>
     <?php endforeach; ?>
 </ul>
