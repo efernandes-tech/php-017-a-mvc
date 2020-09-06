@@ -23,3 +23,6 @@
     - 04 Filtrando Dados
     - 06 Cabeçalhos HTTP
     - 08 Usando Rotas
+- AULA 04 Completando o cadastro
+    - 02 Exclusão de um curso
+        vendor/bin/doctrine orm:generate-proxies
