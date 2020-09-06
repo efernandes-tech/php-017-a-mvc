@@ -1,6 +1,10 @@
 # php-017-a-mvc
 
 # Anotações:
+- Start:
+    composer install
+- Run:
+    php -S localhost:8080 -t public
 - AULA 01 Uma entrada para as requisições
     - 01 Introdução
     - 02 Ambiente e Projeto inicial
@@ -8,3 +12,7 @@
         php -S localhost:8080 -t public
     - 04 Formulário de inserção
     - 06 Ponto único de entrada
+- AULA 02 Entendendo Modelo View Controller
+    - 02 OOP ao resgate
+    - 04 Assinando um Contrato
+    - 06 Isolando o HTML
