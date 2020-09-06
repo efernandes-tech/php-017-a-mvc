@@ -22,3 +22,4 @@
     - 02 Formulários e PHP
     - 04 Filtrando Dados
     - 06 Cabeçalhos HTTP
+    - 08 Usando Rotas
