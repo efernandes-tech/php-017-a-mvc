@@ -46,3 +46,5 @@
     - 07 Implementando Logout
     - 09 Adicionando mensagens
     - 11 Flexibilidade com Traits
+- AULA 07 PSRs e Boas Práticas
+    - 02 Conhecendo as PSRs
