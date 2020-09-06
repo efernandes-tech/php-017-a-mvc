@@ -16,12 +16,18 @@ class Persistencia implements InterfaceControladorRequisicao
 
     public function processaRequisicao(): void
     {
+        $id = filter_input(INPUT_GET, 'id', FILTER_VALIDATE_INT);
         $descricao = filter_input(INPUT_POST, 'descricao', FILTER_SANITIZE_STRING);
 
         $curso = new Curso();
         $curso->setDescricao($descricao);
 
-        $this->entityManager->persist($curso);
+        if ( ! is_null($id) && $id !== false) {
+            $curso->setId($id);
+            $this->entityManager->merge($curso);
+        } else {
+            $this->entityManager->persist($curso);
+        }
         $this->entityManager->flush();
 
         header('Location: /listar-cursos', true, 302);

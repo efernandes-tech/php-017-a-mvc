@@ -28,3 +28,4 @@
     - 02 Exclusão de um curso
         vendor/bin/doctrine orm:generate-proxies
     - 04 Formulário de alteração
+    - 06 Salvando as alterações

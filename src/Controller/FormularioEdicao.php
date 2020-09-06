@@ -2,6 +2,7 @@
 
 namespace Alura\Cursos\Controller;
 
+use Alura\Cursos\Entity\Curso;
 use Alura\Cursos\Infra\EntityManagerCreator;
 
 class FormularioEdicao implements InterfaceControladorRequisicao
