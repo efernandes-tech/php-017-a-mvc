@@ -4,7 +4,7 @@ require __DIR__ . '/../vendor/autoload.php';
 
 use Nyholm\Psr7\Factory\Psr17Factory;
 use Nyholm\Psr7Server\ServerRequestCreator;
-use Alura\Cursos\Controller\InterfaceControladorRequisicao;
+use Psr\Http\Server\RequestHandlerInterface;
 
 $caminho = $_SERVER['PATH_INFO'];
 $rotas = require __DIR__ . '/../config/routes.php';
@@ -36,14 +36,14 @@ $request = $creator->fromGlobals();
 $classControladora = $rotas[$caminho];
 
 /**
- * @var InterfaceControladorRequisicao $controlador
+ * @var RequestHandlerInterface $controlador
  */
 $controlador = new $classControladora();
-$resposta = $controlador->processaRequisicao($request);
+$resposta = $controlador->handle($request);
 
-foreach ($resposta->getHeaders() as $name => $values) {
-    foreach ($values as $value) {
-        header(sprintf('%s: %s', $name, $value), false);
+foreach ($resposta->getHeaders() as $header => $valores) {
+    foreach ($valores as $value) {
+        header(sprintf('%s: %s', $header, $value), false);
     }
 }
 
