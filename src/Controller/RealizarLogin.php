@@ -2,45 +2,49 @@
 
 namespace Alura\Cursos\Controller;
 
+use Nyholm\Psr7\Response;
 use Alura\Cursos\Entity\Usuario;
 use Alura\Cursos\Helper\FlashMensagem;
-use Alura\Cursos\Infra\EntityManagerCreator;
+use Psr\Http\Message\ResponseInterface;
+use Doctrine\ORM\EntityManagerInterface;
+use Psr\Http\Message\ServerRequestInterface;
+use Psr\Http\Server\RequestHandlerInterface;
 
-class RealizarLogin implements InterfaceControladorRequisicao
+class RealizarLogin implements RequestHandlerInterface
 {
     use FlashMensagem;
 
     private $repositorioDeUsuarios;
 
-    public function __construct()
+    public function __construct(EntityManagerInterface $entityManager)
     {
-        $entityManager = (new EntityManagerCreator())->getEntityManager();
-
         $this->repositorioDeUsuarios = $entityManager->getRepository(usuario::class);
     }
 
-    public function processaRequisicao(): void
+    public function handle(ServerRequestInterface $request): ResponseInterface
     {
-        $email = filter_input(INPUT_POST, 'email', FILTER_VALIDATE_EMAIL);
+        $parsedBody = $request->getParsedBody();
 
-        if (is_null($email) && $email === false) {
+        $email = filter_var($parsedBody['email'], FILTER_VALIDATE_EMAIL);
+
+        if (is_null($email) || $email === false) {
             $this->defineMensagem('danger', 'E-mail inválido');
-            header('Location: /login');
-            return;
+
+            return new Response(302, ['Location' => '/login']);
         }
 
-        $senha = filter_input(INPUT_POST, 'senha', FILTER_SANITIZE_STRING);
+        $senha = filter_var($parsedBody['senha'], FILTER_SANITIZE_STRING);
 
         $usuario = $this->repositorioDeUsuarios->findOneBy(['email' => $email]);
 
         if (is_null($usuario) || ! $usuario->senhaEstaCorreta($senha)) {
             $this->defineMensagem('danger', 'E-mail e senha inválidos');
-            header('Location: /login');
-            return;
+
+            return new Response(302, ['Location' => '/login']);
         }
 
         $_SESSION['logado'] = true;
 
-        header('Location: /listar-cursos', true, 302);
+        return new Response(302, ['Location' => '/listar-cursos']);
     }
 }

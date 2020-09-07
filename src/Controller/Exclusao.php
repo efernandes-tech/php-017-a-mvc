@@ -30,10 +30,12 @@ class Exclusao implements RequestHandlerInterface
 
         $id = filter_var($queryString['id'], FILTER_VALIDATE_INT);
 
+        $response = new Response(302, ['Location' => '/listar-cursos']);
+
         if (is_null($id) || $id === false) {
             $this->defineMensagem('danger', 'Curso não encontrado');
 
-            return new Response(302, ['Location' => '/listar-cursos']);
+            return $response;
         }
 
         $curso = $this->entityManager->getReference(Curso::class, $id);
@@ -42,6 +44,6 @@ class Exclusao implements RequestHandlerInterface
 
         $this->defineMensagem('success', 'Curso removido com sucesso');
 
-        return new Response(302, ['Location' => '/listar-cursos']);
+        return $response;
     }
 }

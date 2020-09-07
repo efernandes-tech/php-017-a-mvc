@@ -2,25 +2,37 @@
 
 namespace Alura\Cursos\Controller;
 
+use Nyholm\Psr7\Response;
 use Alura\Cursos\Entity\Curso;
 use Alura\Cursos\Helper\FlashMensagem;
-use Alura\Cursos\Infra\EntityManagerCreator;
+use Psr\Http\Message\ResponseInterface;
+use Doctrine\ORM\EntityManagerInterface;
+use Psr\Http\Message\ServerRequestInterface;
+use Psr\Http\Server\RequestHandlerInterface;
 
-class Persistencia implements InterfaceControladorRequisicao
+class Persistencia implements RequestHandlerInterface
 {
     use FlashMensagem;
 
+    /**
+     * @var EntityManagerInterface
+     */
     private $entityManager;
 
-    public function __construct()
+    public function __construct(EntityManagerInterface $entityManager)
     {
-        $this->entityManager = (new EntityManagerCreator())->getEntityManager();
+        $this->entityManager = $entityManager;
     }
 
-    public function processaRequisicao(): void
+    public function handle(ServerRequestInterface $request): ResponseInterface
     {
-        $id = filter_input(INPUT_GET, 'id', FILTER_VALIDATE_INT);
-        $descricao = filter_input(INPUT_POST, 'descricao', FILTER_SANITIZE_STRING);
+        $queryString = $request->getQueryParams();
+
+        $id = filter_var($queryString['id'], FILTER_VALIDATE_INT);
+
+        $parsedBody = $request->getParsedBody();
+
+        $descricao = filter_var($parsedBody['descricao'], FILTER_SANITIZE_STRING);
 
         $curso = new Curso();
         $curso->setDescricao($descricao);
@@ -37,6 +49,6 @@ class Persistencia implements InterfaceControladorRequisicao
 
         $this->entityManager->flush();
 
-        header('Location: /listar-cursos', true, 302);
+        return new Response(302, ['Location' => '/listar-cursos']);
     }
 }
