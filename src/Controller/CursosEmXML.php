@@ -9,7 +9,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\RequestHandlerInterface;
 
-class CursosEmJSON implements RequestHandlerInterface
+class CursosEmXML implements RequestHandlerInterface
 {
     private $repositorioDeCursos;
 
@@ -22,7 +22,16 @@ class CursosEmJSON implements RequestHandlerInterface
     {
         $cursos = $this->repositorioDeCursos->findAll();
 
-        return new Response(200, ['Content-Type' => 'application/json'], json_encode($cursos));
+        $cursosEmXML = new \SimpleXMLElement('<cursos/>');
+
+        foreach ($cursos as $curso) {
+            $cursoXML = $cursosEmXML->addChild('curso');
+
+            $cursoXML->addChild('id', $curso->getId());
+            $cursoXML->addChild('descricao', $curso->getDescricao());
+        }
+
+        return new Response(200, ['Content-Type' => 'application/xml'], $cursosEmXML->asXML());
     }
 }
 

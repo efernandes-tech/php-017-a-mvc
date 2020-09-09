@@ -60,3 +60,5 @@
     - 13 Solução
 - AULA 08 Introdução a WebServices
     - 02 O que são WebServices
+    - 03 Cursos em JSON
+    - 05 Devolvendo XML
